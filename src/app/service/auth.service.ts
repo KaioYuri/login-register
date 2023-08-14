@@ -20,4 +20,10 @@ export class AuthService {
   Updateuser(code: any, inputdata: any){
     return this.http.post(this.apiurl+'/'+code, inputdata)
   }
+  IsloggedIn(){
+    return sessionStorage.getItem('username')!=null;
+  }
+  GetUserrole(){
+    return sessionStorage.getItem('userrole')!=null?sessionStorage.getItem('userrole')?.toString():'';
+  }
 }
