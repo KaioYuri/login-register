@@ -7,7 +7,7 @@
       "email": "teste@iei",
       "gender": "male",
       "role": "admin",
-      "isactive": false
+      "isactive": true
     }
   ]
 }
