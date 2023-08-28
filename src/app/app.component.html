@@ -303,7 +303,7 @@
   </style>
   
   <!-- Toolbar -->
-  <div class="toolbar" role="banner">
+  <div class="toolbar" *ngIf="ismenurequired" role="banner">
     <img
       width="40"
       alt="Angular Logo"
@@ -313,7 +313,7 @@
     <a class="navbar" routerLink="">Home</a>
     <a class="navbar" routerLink="/user">Usuário</a>
       <div class="spacer"></div>
-      <a class="navbar" routerLink="/login">logout</a>
+      <a class="navbar" routerLink="/login">Logout</a>
     
   </div>
   
