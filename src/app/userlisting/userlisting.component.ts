@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
+import { UpdatepopupComponent } from '../updatepopup/updatepopup.component';
 
 @Component({
   selector: 'app-userlisting',
@@ -30,10 +31,20 @@ export class UserlistingComponent {
   }
   displayedColumns: string[] = ['id','name','email','role','status','action'];
   UpdateUser(code: any){
-    this.dialog.open()
+    const popup = this.dialog.open(UpdatepopupComponent,{
+      enterAnimationDuration:'1000ms',
+      exitAnimationDuration: '500ms',
+      width:'50%',
+      data:{
+        usercode:code
+      }
+    })
+    popup.afterClosed().subscribe(res=>{
+
+    });
   }
 
-  opendiealog(){
-
+  opendialog(){
+    this.Loaduser();
   }
 }
