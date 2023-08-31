@@ -8,6 +8,29 @@
       "gender": "male",
       "role": "admin",
       "isactive": true
+    },
+    {
+      "id": "Maria",
+      "name": "Maria Eduarda",
+      "password": "Maria$123456",
+      "email": "maria@hotmail.com",
+      "gender": "female",
+      "role": "",
+      "isactive": false
+    }
+  ],
+  "role": [
+    {
+      "code": "admin",
+      "name": "Admin"
+    },
+    {
+      "code": "gerente",
+      "name": "Gerente"
+    },
+    {
+      "code": "usuário",
+      "name": "Usuário"
     }
   ]
 }
