@@ -30,7 +30,7 @@ export class LoginComponent {
     if (this.loginform.valid) {
       this.service.Getbycode(this.loginform.value.username).subscribe((res) => {
         this.userdata = res;
-        console.log(this.userdata);
+        //console.log(this.userdata);
         if (this.userdata.password === this.loginform.value.password) {
           if (this.userdata.isactive) {
             sessionStorage.setItem('username', this.userdata.id);
@@ -39,7 +39,7 @@ export class LoginComponent {
           } else {
             this.toastr.error(
               'Por favor, fale com o admin',
-              ' Usuário está ativo'
+              ' Usuário está inativo'
             );
           }
         } else {
