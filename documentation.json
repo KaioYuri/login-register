@@ -1,0 +1,2191 @@
+{
+    "pipes": [],
+    "interfaces": [
+        {
+            "name": "User",
+            "id": "interface-User-9c7e5f1bbbab702cb032307d130876cb68969b0cd4eedef32a0c8cad8081a54e5f8f577ed6ad4539c1b99a1d246cb34031d198c2ea8eba440e64e91b14f01fdc",
+            "file": "src/stories/User.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "export interface User {}\n",
+            "properties": [],
+            "indexSignatures": [],
+            "methods": []
+        }
+    ],
+    "injectables": [
+        {
+            "name": "AuthGuard",
+            "id": "injectable-AuthGuard-7b782aa62875e07567902a13fffb4d24beab08b9d6705972bca672953b2fd9f30c818cd3d61508bc64242496c216de0c461e6e1314f3ace646e8164adc8f5366",
+            "file": "src/app/guard/auth.guard.ts",
+            "properties": [],
+            "methods": [
+                {
+                    "name": "canActivate",
+                    "args": [
+                        {
+                            "name": "next",
+                            "type": "ActivatedRouteSnapshot",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "state",
+                            "type": "RouterStateSnapshot",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "Observable | Promise | UrlTree | boolean",
+                    "typeParameters": [],
+                    "line": 24,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "next",
+                            "type": "ActivatedRouteSnapshot",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "state",
+                            "type": "RouterStateSnapshot",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "description": "",
+            "rawdescription": "\n",
+            "sourceCode": "import { Injectable } from '@angular/core';\r\nimport {\r\n  ActivatedRouteSnapshot,\r\n  RouterStateSnapshot,\r\n  Router,\r\n  UrlTree,\r\n} from '@angular/router';\r\nimport { AuthService } from '../service/auth.service';\r\nimport { Observable } from 'rxjs';\r\nimport { ToastrService } from 'ngx-toastr';\r\n\r\n@Injectable({\r\n  providedIn: 'root',\r\n})\r\n\r\nexport class AuthGuard {\r\n  \r\n  constructor(\r\n    private authService: AuthService,\r\n    private router: Router,\r\n    private toastr: ToastrService\r\n  ) {}\r\n\r\n  canActivate(\r\n    next: ActivatedRouteSnapshot,\r\n    state: RouterStateSnapshot\r\n  ): Observable<boolean> | Promise<boolean> | UrlTree | boolean {\r\n    if (this.authService.IsloggedIn()) {\r\n      return true;\r\n    } else {\r\n      this.router.navigate(['login']);\r\n      return false;\r\n    }\r\n  }\r\n}\r\n",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "authService",
+                        "type": "AuthService",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "router",
+                        "type": "Router",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "toastr",
+                        "type": "ToastrService",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 16,
+                "jsdoctags": [
+                    {
+                        "name": "authService",
+                        "type": "AuthService",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "router",
+                        "type": "Router",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "toastr",
+                        "type": "ToastrService",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "type": "injectable"
+        },
+        {
+            "name": "AuthService",
+            "id": "injectable-AuthService-deade4791c94de0e2d47d4b4c87c4c6929b6f70325f7c331e6aa06f759b839f59e370205d4188d6bc40843f0fe7018b85e564f6170afea14232640ac86642820",
+            "file": "src/app/service/auth.service.ts",
+            "properties": [
+                {
+                    "name": "apiurl",
+                    "defaultValue": "'http://localhost:3000/user'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 10
+                }
+            ],
+            "methods": [
+                {
+                    "name": "GetAll",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 11,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "GetAllRole",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 17,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "Getbycode",
+                    "args": [
+                        {
+                            "name": "code",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 14,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "code",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "GetUserrole",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 29,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "IsloggedIn",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "boolean",
+                    "typeParameters": [],
+                    "line": 26,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "Proceedregister",
+                    "args": [
+                        {
+                            "name": "inputdata",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 20,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "inputdata",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Updateuser",
+                    "args": [
+                        {
+                            "name": "code",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "inputdata",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 23,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "code",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "inputdata",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "description": "",
+            "rawdescription": "\n",
+            "sourceCode": "import { HttpClient } from '@angular/common/http';\r\nimport { Injectable } from '@angular/core';\r\n\r\n@Injectable({\r\n  providedIn: 'root'\r\n})\r\nexport class AuthService {\r\n\r\n  constructor(private http:HttpClient) { }\r\n  apiurl='http://localhost:3000/user';\r\n  GetAll(){\r\n    return this.http.get(this.apiurl);\r\n  }\r\n  Getbycode(code:any){\r\n    return this.http.get(this.apiurl+'/'+code);\r\n  }\r\n  GetAllRole(){\r\n    return this.http.get('http://localhost:3000/role');\r\n  }\r\n  Proceedregister(inputdata: any){\r\n    return this.http.post(this.apiurl, inputdata)\r\n  }\r\n  Updateuser(code: any, inputdata: any){\r\n    return this.http.post(this.apiurl+'/'+code, inputdata)\r\n  }\r\n  IsloggedIn(){\r\n    return sessionStorage.getItem('username')!=null;\r\n  }\r\n  GetUserrole(){\r\n    return sessionStorage.getItem('userrole')!=null?sessionStorage.getItem('userrole')?.toString():'';\r\n  }\r\n}\r\n",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "http",
+                        "type": "HttpClient",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 7,
+                "jsdoctags": [
+                    {
+                        "name": "http",
+                        "type": "HttpClient",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "type": "injectable"
+        }
+    ],
+    "guards": [],
+    "interceptors": [],
+    "classes": [],
+    "directives": [],
+    "components": [
+        {
+            "name": "AppComponent",
+            "id": "component-AppComponent-34e70fb2466cf0fafb45d66c4ada2c5e09104470dd9719e8b41370020c51cfdecc4b0353b54487647e14dae0792c9fd2674aedb7c921b6b9b7617dfb67764535",
+            "file": "src/app/app.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-root",
+            "styleUrls": [
+                "./app.component.css"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./app.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "ismenurequired",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 11
+                },
+                {
+                    "name": "title",
+                    "defaultValue": "'login-register'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 10
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "ngDoCheck",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 15,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, DoCheck } from '@angular/core';\r\nimport { Router } from '@angular/router';\r\n\r\n@Component({\r\n  selector: 'app-root',\r\n  templateUrl: './app.component.html',\r\n  styleUrls: ['./app.component.css']\r\n})\r\nexport class AppComponent implements DoCheck{\r\n  title = 'login-register';\r\n  ismenurequired=false;\r\n  constructor(private router:Router){\r\n\r\n  }\r\n  ngDoCheck(): void {\r\n    let currenturl=this.router.url;\r\n    if(currenturl=='/login'|| currenturl=='/register'){\r\n      this.ismenurequired=false;\r\n    }else{\r\n      this.ismenurequired=true;\r\n    }\r\n  }\r\n}\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".navbar{\r\n    color: white;\r\n    margin: 8px;\r\n}",
+                    "styleUrl": "./app.component.css"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "router",
+                        "type": "Router",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 11,
+                "jsdoctags": [
+                    {
+                        "name": "router",
+                        "type": "Router",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "implements": [
+                "DoCheck"
+            ],
+            "templateData": "<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->\r\n<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->\r\n<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->\r\n<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->\r\n<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->\r\n<!-- * * * * * * * * * Delete the template below * * * * * * * * * * -->\r\n<!-- * * * * * * * to get started with your project! * * * * * * * * -->\r\n<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->\r\n\r\n<style>\r\n    :host {\r\n      font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\";\r\n      font-size: 14px;\r\n      color: #333;\r\n      box-sizing: border-box;\r\n      -webkit-font-smoothing: antialiased;\r\n      -moz-osx-font-smoothing: grayscale;\r\n    }\r\n  \r\n    h1,\r\n    h2,\r\n    h3,\r\n    h4,\r\n    h5,\r\n    h6 {\r\n      margin: 8px 0;\r\n    }\r\n  \r\n    p {\r\n      margin: 0;\r\n    }\r\n  \r\n    .spacer {\r\n      flex: 1;\r\n    }\r\n  \r\n    .toolbar {\r\n      position: absolute;\r\n      top: 0;\r\n      left: 0;\r\n      right: 0;\r\n      height: 60px;\r\n      display: flex;\r\n      align-items: center;\r\n      background-color: #1976d2;\r\n      color: white;\r\n      font-weight: 600;\r\n    }\r\n  \r\n    .toolbar img {\r\n      margin: 0 16px;\r\n    }\r\n  \r\n    .toolbar #twitter-logo {\r\n      height: 40px;\r\n      margin: 0 8px;\r\n    }\r\n  \r\n    .toolbar #youtube-logo {\r\n      height: 40px;\r\n      margin: 0 16px;\r\n    }\r\n  \r\n    .toolbar #twitter-logo:hover,\r\n    .toolbar #youtube-logo:hover {\r\n      opacity: 0.8;\r\n    }\r\n  \r\n    .content {\r\n      display: flex;\r\n      margin: 82px auto 32px;\r\n      padding: 0 16px;\r\n      max-width: 960px;\r\n      flex-direction: column;\r\n      align-items: center;\r\n    }\r\n  \r\n    svg.material-icons {\r\n      height: 24px;\r\n      width: auto;\r\n    }\r\n  \r\n    svg.material-icons:not(:last-child) {\r\n      margin-right: 8px;\r\n    }\r\n  \r\n    .card svg.material-icons path {\r\n      fill: #888;\r\n    }\r\n  \r\n    .card-container {\r\n      display: flex;\r\n      flex-wrap: wrap;\r\n      justify-content: center;\r\n      margin-top: 16px;\r\n    }\r\n  \r\n    .card {\r\n      all: unset;\r\n      border-radius: 4px;\r\n      border: 1px solid #eee;\r\n      background-color: #fafafa;\r\n      height: 40px;\r\n      width: 200px;\r\n      margin: 0 8px 16px;\r\n      padding: 16px;\r\n      display: flex;\r\n      flex-direction: row;\r\n      justify-content: center;\r\n      align-items: center;\r\n      transition: all 0.2s ease-in-out;\r\n      line-height: 24px;\r\n    }\r\n  \r\n    .card-container .card:not(:last-child) {\r\n      margin-right: 0;\r\n    }\r\n  \r\n    .card.card-small {\r\n      height: 16px;\r\n      width: 168px;\r\n    }\r\n  \r\n    .card-container .card:not(.highlight-card) {\r\n      cursor: pointer;\r\n    }\r\n  \r\n    .card-container .card:not(.highlight-card):hover {\r\n      transform: translateY(-3px);\r\n      box-shadow: 0 4px 17px rgba(0, 0, 0, 0.35);\r\n    }\r\n  \r\n    .card-container .card:not(.highlight-card):hover .material-icons path {\r\n      fill: rgb(105, 103, 103);\r\n    }\r\n  \r\n    .card.highlight-card {\r\n      background-color: #1976d2;\r\n      color: white;\r\n      font-weight: 600;\r\n      border: none;\r\n      width: auto;\r\n      min-width: 30%;\r\n      position: relative;\r\n    }\r\n  \r\n    .card.card.highlight-card span {\r\n      margin-left: 60px;\r\n    }\r\n  \r\n    svg#rocket {\r\n      width: 80px;\r\n      position: absolute;\r\n      left: -10px;\r\n      top: -24px;\r\n    }\r\n  \r\n    svg#rocket-smoke {\r\n      height: calc(100vh - 95px);\r\n      position: absolute;\r\n      top: 10px;\r\n      right: 180px;\r\n      z-index: -10;\r\n    }\r\n  \r\n    a,\r\n    a:visited,\r\n    a:hover {\r\n      color: #1976d2;\r\n      text-decoration: none;\r\n    }\r\n  \r\n    a:hover {\r\n      color: #125699;\r\n    }\r\n  \r\n    .terminal {\r\n      position: relative;\r\n      width: 80%;\r\n      max-width: 600px;\r\n      border-radius: 6px;\r\n      padding-top: 45px;\r\n      margin-top: 8px;\r\n      overflow: hidden;\r\n      background-color: rgb(15, 15, 16);\r\n    }\r\n  \r\n    .terminal::before {\r\n      content: \"\\2022 \\2022 \\2022\";\r\n      position: absolute;\r\n      top: 0;\r\n      left: 0;\r\n      height: 4px;\r\n      background: rgb(58, 58, 58);\r\n      color: #c2c3c4;\r\n      width: 100%;\r\n      font-size: 2rem;\r\n      line-height: 0;\r\n      padding: 14px 0;\r\n      text-indent: 4px;\r\n    }\r\n  \r\n    .terminal pre {\r\n      font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;\r\n      color: white;\r\n      padding: 0 1rem 1rem;\r\n      margin: 0;\r\n    }\r\n  \r\n    .circle-link {\r\n      height: 40px;\r\n      width: 40px;\r\n      border-radius: 40px;\r\n      margin: 8px;\r\n      background-color: white;\r\n      border: 1px solid #eeeeee;\r\n      display: flex;\r\n      justify-content: center;\r\n      align-items: center;\r\n      cursor: pointer;\r\n      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);\r\n      transition: 1s ease-out;\r\n    }\r\n  \r\n    .circle-link:hover {\r\n      transform: translateY(-0.25rem);\r\n      box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);\r\n    }\r\n  \r\n    footer {\r\n      margin-top: 8px;\r\n      display: flex;\r\n      align-items: center;\r\n      line-height: 20px;\r\n    }\r\n  \r\n    footer a {\r\n      display: flex;\r\n      align-items: center;\r\n    }\r\n  \r\n    .github-star-badge {\r\n      color: #24292e;\r\n      display: flex;\r\n      align-items: center;\r\n      font-size: 12px;\r\n      padding: 3px 10px;\r\n      border: 1px solid rgba(27,31,35,.2);\r\n      border-radius: 3px;\r\n      background-image: linear-gradient(-180deg,#fafbfc,#eff3f6 90%);\r\n      margin-left: 4px;\r\n      font-weight: 600;\r\n    }\r\n  \r\n    .github-star-badge:hover {\r\n      background-image: linear-gradient(-180deg,#f0f3f6,#e6ebf1 90%);\r\n      border-color: rgba(27,31,35,.35);\r\n      background-position: -.5em;\r\n    }\r\n  \r\n    .github-star-badge .material-icons {\r\n      height: 16px;\r\n      width: 16px;\r\n      margin-right: 4px;\r\n    }\r\n  \r\n    svg#clouds {\r\n      position: fixed;\r\n      bottom: -160px;\r\n      left: -230px;\r\n      z-index: -10;\r\n      width: 1920px;\r\n    }\r\n  \r\n    /* Responsive Styles */\r\n    @media screen and (max-width: 767px) {\r\n      .card-container > *:not(.circle-link) ,\r\n      .terminal {\r\n        width: 100%;\r\n      }\r\n  \r\n      .card:not(.highlight-card) {\r\n        height: 16px;\r\n        margin: 8px 0;\r\n      }\r\n  \r\n      .card.highlight-card span {\r\n        margin-left: 72px;\r\n      }\r\n  \r\n      svg#rocket-smoke {\r\n        right: 120px;\r\n        transform: rotate(-5deg);\r\n      }\r\n    }\r\n  \r\n    @media screen and (max-width: 575px) {\r\n      svg#rocket-smoke {\r\n        display: none;\r\n        visibility: hidden;\r\n      }\r\n    }\r\n  </style>\r\n  \r\n  <!-- Toolbar -->\r\n  <div class=\"toolbar\" *ngIf=\"ismenurequired\" role=\"banner\">\r\n    <img\r\n      width=\"40\"\r\n      alt=\"Angular Logo\"\r\n      src=\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==\"\r\n    />\r\n    <span>Welcome</span>\r\n    <a class=\"navbar\" routerLink=\"\">Home</a>\r\n    <a class=\"navbar\" routerLink=\"/user\">Usuário</a>\r\n      <div class=\"spacer\"></div>\r\n      <a class=\"navbar\" routerLink=\"/login\">Logout</a>\r\n    \r\n  </div>\r\n  \r\n  <div class=\"content\" style=\"width: 100%; display: block;\" role=\"main\">\r\n      <router-outlet></router-outlet>\r\n  </div>\r\n    <!-- Highlight Card -->\r\n\r\n  "
+        },
+        {
+            "name": "ButtonComponent",
+            "id": "component-ButtonComponent-a53fd738b978780d39fb5fcc9ae4cfe0088e57a1f6ce674862d57dab9192140bd1c05548a9910db0469a431142886e658ff2e761f15781b2ad430e58d64724d0",
+            "file": "src/stories/button.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "storybook-button",
+            "styleUrls": [
+                "./button.css"
+            ],
+            "styles": [],
+            "template": "<button   type=\"button\"\n   (click)=\"onClick.emit($event)\"\n   [ngClass]=\"classes\"\n   [ngStyle]=\"{ 'background-color': backgroundColor }\"\n >\n   {{ label }}\n </button>",
+            "templateUrl": [],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "backgroundColor",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nWhat background color to use\n",
+                    "description": "<p>What background color to use</p>\n",
+                    "line": 28,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "label",
+                    "defaultValue": "'Button'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "pos": 786,
+                            "end": 799,
+                            "flags": 8421376,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 330,
+                            "tagName": {
+                                "pos": 787,
+                                "end": 795,
+                                "flags": 8421376,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "required"
+                            },
+                            "comment": ""
+                        }
+                    ],
+                    "rawdescription": "\n\nButton contents\n\n",
+                    "description": "<p>Button contents</p>\n",
+                    "line": 42,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "primary",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nIs this the principal call to action on the page?\n",
+                    "description": "<p>Is this the principal call to action on the page?</p>\n",
+                    "line": 22,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "size",
+                    "defaultValue": "'medium'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nHow large should the button be?\n",
+                    "description": "<p>How large should the button be?</p>\n",
+                    "line": 34,
+                    "type": "\"small\" | \"medium\" | \"large\"",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "onClick",
+                    "defaultValue": "new EventEmitter<Event>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nOptional click handler\n",
+                    "description": "<p>Optional click handler</p>\n",
+                    "line": 48,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { CommonModule } from '@angular/common';\nimport { Component, Input, Output, EventEmitter } from '@angular/core';\n\n@Component({\n  selector: 'storybook-button',\n  imports: [CommonModule],\n  template: ` <button\n    type=\"button\"\n    (click)=\"onClick.emit($event)\"\n    [ngClass]=\"classes\"\n    [ngStyle]=\"{ 'background-color': backgroundColor }\"\n  >\n    {{ label }}\n  </button>`,\n  styleUrls: ['./button.css'],\n})\nexport default class ButtonComponent {\n  /**\n   * Is this the principal call to action on the page?\n   */\n  @Input()\n  primary = false;\n\n  /**\n   * What background color to use\n   */\n  @Input()\n  backgroundColor?: string;\n\n  /**\n   * How large should the button be?\n   */\n  @Input()\n  size: 'small' | 'medium' | 'large' = 'medium';\n\n  /**\n   * Button contents\n   *\n   * @required\n   */\n  @Input()\n  label = 'Button';\n\n  /**\n   * Optional click handler\n   */\n  @Output()\n  onClick = new EventEmitter<Event>();\n\n  public get classes(): string[] {\n    const mode = this.primary ? 'storybook-button--primary' : 'storybook-button--secondary';\n\n    return ['storybook-button', `storybook-button--${this.size}`, mode];\n  }\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".storybook-button {\n  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;\n  font-weight: 700;\n  border: 0;\n  border-radius: 3em;\n  cursor: pointer;\n  display: inline-block;\n  line-height: 1;\n}\n.storybook-button--primary {\n  color: white;\n  background-color: #1ea7fd;\n}\n.storybook-button--secondary {\n  color: #333;\n  background-color: transparent;\n  box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset;\n}\n.storybook-button--small {\n  font-size: 12px;\n  padding: 10px 16px;\n}\n.storybook-button--medium {\n  font-size: 14px;\n  padding: 11px 20px;\n}\n.storybook-button--large {\n  font-size: 16px;\n  padding: 12px 24px;\n}\n",
+                    "styleUrl": "./button.css"
+                }
+            ],
+            "stylesData": "",
+            "accessors": {
+                "classes": {
+                    "name": "classes",
+                    "getSignature": {
+                        "name": "classes",
+                        "type": "[]",
+                        "returnType": "string[]",
+                        "line": 50
+                    }
+                }
+            }
+        },
+        {
+            "name": "HeaderComponent",
+            "id": "component-HeaderComponent-3d494fd89671305c6be07de00e019efdf08f2e36c2169e5fb75a5acdb2841da927e3ef3cbd21cc18f478373a784b1fb90e8b63b9df4b3498a75b652bd9c37b38",
+            "file": "src/stories/header.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "storybook-header",
+            "styleUrls": [
+                "./header.css"
+            ],
+            "styles": [],
+            "template": "<header>    <div class=\"storybook-header\">\n      <div>\n        <svg width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" xmlns=\"http://www.w3.org/2000/svg\">\n          <g fill=\"none\" fillRule=\"evenodd\">\n            <path\n              d=\"M10 0h12a10 10 0 0110 10v12a10 10 0 01-10 10H10A10 10 0 010 22V10A10 10 0 0110 0z\"\n              fill=\"#FFF\"\n            />\n            <path\n              d=\"M5.3 10.6l10.4 6v11.1l-10.4-6v-11zm11.4-6.2l9.7 5.5-9.7 5.6V4.4z\"\n              fill=\"#555AB9\"\n            />\n            <path\n              d=\"M27.2 10.6v11.2l-10.5 6V16.5l10.5-6zM15.7 4.4v11L6 10l9.7-5.5z\"\n              fill=\"#91BAF8\"\n            />\n          </g>\n        </svg>\n        <h1>Acme</h1>\n      </div>\n      <div>\n        <div *ngIf=\"user\">\n          <span class=\"welcome\">\n            Welcome, <b>{{ user.name }}</b\n            >!\n          </span>\n          <storybook-button\n            *ngIf=\"user\"\n            size=\"small\"\n            (onClick)=\"onLogout.emit($event)\"\n            label=\"Log out\"\n          ></storybook-button>\n        </div>\n        <div *ngIf=\"!user\">\n          <storybook-button\n            *ngIf=\"!user\"\n            size=\"small\"\n            class=\"margin-left\"\n            (onClick)=\"onLogin.emit($event)\"\n            label=\"Log in\"\n          ></storybook-button>\n          <storybook-button\n            *ngIf=\"!user\"\n            primary\n            size=\"small\"\n            primary=\"true\"\n            class=\"margin-left\"\n            (onClick)=\"onCreateAccount.emit($event)\"\n            label=\"Sign up\"\n          ></storybook-button>\n        </div>\n      </div>\n    </div>\n  </header>",
+            "templateUrl": [],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "user",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 65,
+                    "type": "User | null",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "onCreateAccount",
+                    "defaultValue": "new EventEmitter<Event>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 74,
+                    "type": "EventEmitter"
+                },
+                {
+                    "name": "onLogin",
+                    "defaultValue": "new EventEmitter<Event>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 68,
+                    "type": "EventEmitter"
+                },
+                {
+                    "name": "onLogout",
+                    "defaultValue": "new EventEmitter<Event>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 71,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\nimport type { User } from './User';\n\n@Component({\n  selector: 'storybook-header',\n  template: `<header>\n    <div class=\"storybook-header\">\n      <div>\n        <svg width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" xmlns=\"http://www.w3.org/2000/svg\">\n          <g fill=\"none\" fillRule=\"evenodd\">\n            <path\n              d=\"M10 0h12a10 10 0 0110 10v12a10 10 0 01-10 10H10A10 10 0 010 22V10A10 10 0 0110 0z\"\n              fill=\"#FFF\"\n            />\n            <path\n              d=\"M5.3 10.6l10.4 6v11.1l-10.4-6v-11zm11.4-6.2l9.7 5.5-9.7 5.6V4.4z\"\n              fill=\"#555AB9\"\n            />\n            <path\n              d=\"M27.2 10.6v11.2l-10.5 6V16.5l10.5-6zM15.7 4.4v11L6 10l9.7-5.5z\"\n              fill=\"#91BAF8\"\n            />\n          </g>\n        </svg>\n        <h1>Acme</h1>\n      </div>\n      <div>\n        <div *ngIf=\"user\">\n          <span class=\"welcome\">\n            Welcome, <b>{{ user.name }}</b\n            >!\n          </span>\n          <storybook-button\n            *ngIf=\"user\"\n            size=\"small\"\n            (onClick)=\"onLogout.emit($event)\"\n            label=\"Log out\"\n          ></storybook-button>\n        </div>\n        <div *ngIf=\"!user\">\n          <storybook-button\n            *ngIf=\"!user\"\n            size=\"small\"\n            class=\"margin-left\"\n            (onClick)=\"onLogin.emit($event)\"\n            label=\"Log in\"\n          ></storybook-button>\n          <storybook-button\n            *ngIf=\"!user\"\n            primary\n            size=\"small\"\n            primary=\"true\"\n            class=\"margin-left\"\n            (onClick)=\"onCreateAccount.emit($event)\"\n            label=\"Sign up\"\n          ></storybook-button>\n        </div>\n      </div>\n    </div>\n  </header>`,\n  styleUrls: ['./header.css'],\n})\nexport default class HeaderComponent {\n  @Input()\n  user: User | null = null;\n\n  @Output()\n  onLogin = new EventEmitter<Event>();\n\n  @Output()\n  onLogout = new EventEmitter<Event>();\n\n  @Output()\n  onCreateAccount = new EventEmitter<Event>();\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".storybook-header {\n  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;\n  border-bottom: 1px solid rgba(0, 0, 0, 0.1);\n  padding: 15px 20px;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n}\n\n.storybook-header svg {\n  display: inline-block;\n  vertical-align: top;\n}\n\n.storybook-header h1 {\n  font-weight: 700;\n  font-size: 20px;\n  line-height: 1;\n  margin: 6px 0 6px 10px;\n  display: inline-block;\n  vertical-align: top;\n}\n\n.storybook-header button + button {\n  margin-left: 10px;\n}\n\n.storybook-header .welcome {\n  color: #333;\n  font-size: 14px;\n  margin-right: 10px;\n}\n",
+                    "styleUrl": "./header.css"
+                }
+            ],
+            "stylesData": ""
+        },
+        {
+            "name": "HomeComponent",
+            "id": "component-HomeComponent-8845e32500b5b43b2ff44d2db4328c8e79f3eee67ad42e3786b0e4eb6a3d5e292426adc3a0a5e9c13bb8e8fe755657bcbcc3fc89fb8347c356fef24ef903a3c5",
+            "file": "src/app/home/home.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-home",
+            "styleUrls": [
+                "./home.component.css"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./home.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-home',\r\n  templateUrl: './home.component.html',\r\n  styleUrls: ['./home.component.css']\r\n})\r\nexport class HomeComponent {\r\n\r\n}\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "",
+                    "styleUrl": "./home.component.css"
+                }
+            ],
+            "stylesData": "",
+            "templateData": "<div style=\"text-align: center;\">\r\n    <h1> Welcome to my website </h1>\r\n</div>\r\n"
+        },
+        {
+            "name": "LoginComponent",
+            "id": "component-LoginComponent-8979aa418e84b079f5e10dc6378fb363aab1bd2e359c3a3f2355f13ef9e7c0cf023019189692674329b81bad58cb10282cea74e170d706a53cf56d76a57c2aab",
+            "file": "src/app/login/login.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-login",
+            "styleUrls": [
+                "./login.component.css"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./login.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "loginform",
+                    "defaultValue": "this.builder.group({\r\n    username: this.builder.control('', Validators.required),\r\n    password: this.builder.control('', Validators.required),\r\n  })",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 24
+                },
+                {
+                    "name": "userdata",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "any",
+                    "optional": false,
+                    "description": "",
+                    "line": 22
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "proceedlogin",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 29,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\r\nimport { FormBuilder, Validators } from '@angular/forms';\r\nimport { ToastrService } from 'ngx-toastr';\r\nimport { AuthService } from '../service/auth.service';\r\nimport { Router } from '@angular/router';\r\n\r\n@Component({\r\n  selector: 'app-login',\r\n  templateUrl: './login.component.html',\r\n  styleUrls: ['./login.component.css'],\r\n})\r\nexport class LoginComponent {\r\n  constructor(\r\n    private builder: FormBuilder,\r\n    private toastr: ToastrService,\r\n    private service: AuthService,\r\n    private router: Router\r\n  ) {\r\n    sessionStorage.clear();\r\n  }\r\n\r\n  userdata: any;\r\n\r\n  loginform = this.builder.group({\r\n    username: this.builder.control('', Validators.required),\r\n    password: this.builder.control('', Validators.required),\r\n  });\r\n\r\n  proceedlogin() {\r\n    if (this.loginform.valid) {\r\n      this.service.Getbycode(this.loginform.value.username).subscribe((res) => {\r\n        this.userdata = res;\r\n        //console.log(this.userdata);\r\n        if (this.userdata.password === this.loginform.value.password) {\r\n          if (this.userdata.isactive) {\r\n            sessionStorage.setItem('username', this.userdata.id);\r\n            sessionStorage.setItem('userrole', this.userdata.role);\r\n            this.router.navigate(['']);\r\n          } else {\r\n            this.toastr.error(\r\n              'Por favor, fale com o admin',\r\n              ' Usuário está inativo'\r\n            );\r\n          }\r\n        } else {\r\n          this.toastr.error('Credenciais inválidas');\r\n        }\r\n      });\r\n    }\r\n  }\r\n}\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".example-form {\r\n    min-width: 150px;\r\n    width: 100%;\r\n  }\r\n  \r\n  .example-full-width {\r\n    width: 100%;\r\n  }\r\n\r\nbutton{\r\n  margin: 5px;\r\n}",
+                    "styleUrl": "./login.component.css"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "builder",
+                        "type": "FormBuilder",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "toastr",
+                        "type": "ToastrService",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "service",
+                        "type": "AuthService",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "router",
+                        "type": "Router",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 12,
+                "jsdoctags": [
+                    {
+                        "name": "builder",
+                        "type": "FormBuilder",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "toastr",
+                        "type": "ToastrService",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "service",
+                        "type": "AuthService",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "router",
+                        "type": "Router",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "templateData": "<mat-card>\r\n    <mat-card-header>\r\n        <h1>Login</h1>\r\n    </mat-card-header>\r\n    <mat-card-content>\r\n        <form class=\"example-form\" [formGroup]=\"loginform\" (ngSubmit)=\"proceedlogin()\">\r\n            <mat-form-field class=\"example-full-width\">\r\n                <mat-label>Nome de usuário</mat-label>\r\n                <input matInput formControlName=\"username\">\r\n            </mat-form-field>\r\n            <mat-form-field class=\"example-full-width\">\r\n                <mat-label>Senha</mat-label>\r\n                <input type=\"password\" matInput formControlName=\"password\">\r\n            </mat-form-field>\r\n\r\n            <div>\r\n                <button mat-raised-button color=\"primary\">Logar</button>\r\n                <a routerLink=\"/register\" mat-raised-button color=\"accent\">Registre-se</a>\r\n            </div>\r\n            </form>\r\n    </mat-card-content>\r\n</mat-card>\r\n  "
+        },
+        {
+            "name": "PageComponent",
+            "id": "component-PageComponent-badb6d8cee577661da79ba82ad8f599604afd40fa34e36c7b88d71d77a4fbc7184228cba2f0d73e255d0b7bc51c4c7a8e7b0128b3624aeb0255abab9030fa59a",
+            "file": "src/stories/page.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "storybook-page",
+            "styleUrls": [
+                "./page.css"
+            ],
+            "styles": [],
+            "template": "<article>    <storybook-header\n      [user]=\"user\"\n      (onLogout)=\"doLogout()\"\n      (onLogin)=\"doLogin()\"\n      (onCreateAccount)=\"doCreateAccount()\"\n    ></storybook-header>\n    <section class=\"storybook-page\">\n      <h2>Pages in Storybook</h2>\n      <p>\n        We recommend building UIs with a\n        <a href=\"https://componentdriven.org\" target=\"_blank\" rel=\"noopener noreferrer\">\n          <strong>component-driven</strong>\n        </a>\n        process starting with atomic components and ending with pages.\n      </p>\n      <p>\n        Render pages with mock data. This makes it easy to build and review page states without\n        needing to navigate to them in your app. Here are some handy patterns for managing page data\n        in Storybook:\n      </p>\n      <ul>\n        <li>\n          Use a higher-level connected component. Storybook helps you compose such data from the\n          \"args\" of child component stories\n        </li>\n        <li>\n          Assemble data in the page component from your services. You can mock these services out\n          using Storybook.\n        </li>\n      </ul>\n      <p>\n        Get a guided tutorial on component-driven development at\n        <a href=\"https://storybook.js.org/tutorials/\" target=\"_blank\" rel=\"noopener noreferrer\">\n          Storybook tutorials\n        </a>\n        . Read more in the\n        <a href=\"https://storybook.js.org/docs\" target=\"_blank\" rel=\"noopener noreferrer\"> docs </a>\n        .\n      </p>\n      <div class=\"tip-wrapper\">\n        <span class=\"tip\">Tip</span> Adjust the width of the canvas with the\n        <svg width=\"10\" height=\"10\" viewBox=\"0 0 12 12\" xmlns=\"http://www.w3.org/2000/svg\">\n          <g fill=\"none\" fillRule=\"evenodd\">\n            <path\n              d=\"M1.5 5.2h4.8c.3 0 .5.2.5.4v5.1c-.1.2-.3.3-.4.3H1.4a.5.5 0 01-.5-.4V5.7c0-.3.2-.5.5-.5zm0-2.1h6.9c.3 0 .5.2.5.4v7a.5.5 0 01-1 0V4H1.5a.5.5 0 010-1zm0-2.1h9c.3 0 .5.2.5.4v9.1a.5.5 0 01-1 0V2H1.5a.5.5 0 010-1zm4.3 5.2H2V10h3.8V6.2z\"\n              id=\"a\"\n              fill=\"#999\"\n            />\n          </g>\n        </svg>\n        Viewports addon in the toolbar\n      </div>\n    </section>\n  </article>",
+            "templateUrl": [],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "user",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "User | null",
+                    "optional": false,
+                    "description": "",
+                    "line": 64
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "doCreateAccount",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 74,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "doLogin",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 70,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "doLogout",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 66,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\nimport type { User } from './User';\n\n@Component({\n  selector: 'storybook-page',\n  template: `<article>\n    <storybook-header\n      [user]=\"user\"\n      (onLogout)=\"doLogout()\"\n      (onLogin)=\"doLogin()\"\n      (onCreateAccount)=\"doCreateAccount()\"\n    ></storybook-header>\n    <section class=\"storybook-page\">\n      <h2>Pages in Storybook</h2>\n      <p>\n        We recommend building UIs with a\n        <a href=\"https://componentdriven.org\" target=\"_blank\" rel=\"noopener noreferrer\">\n          <strong>component-driven</strong>\n        </a>\n        process starting with atomic components and ending with pages.\n      </p>\n      <p>\n        Render pages with mock data. This makes it easy to build and review page states without\n        needing to navigate to them in your app. Here are some handy patterns for managing page data\n        in Storybook:\n      </p>\n      <ul>\n        <li>\n          Use a higher-level connected component. Storybook helps you compose such data from the\n          \"args\" of child component stories\n        </li>\n        <li>\n          Assemble data in the page component from your services. You can mock these services out\n          using Storybook.\n        </li>\n      </ul>\n      <p>\n        Get a guided tutorial on component-driven development at\n        <a href=\"https://storybook.js.org/tutorials/\" target=\"_blank\" rel=\"noopener noreferrer\">\n          Storybook tutorials\n        </a>\n        . Read more in the\n        <a href=\"https://storybook.js.org/docs\" target=\"_blank\" rel=\"noopener noreferrer\"> docs </a>\n        .\n      </p>\n      <div class=\"tip-wrapper\">\n        <span class=\"tip\">Tip</span> Adjust the width of the canvas with the\n        <svg width=\"10\" height=\"10\" viewBox=\"0 0 12 12\" xmlns=\"http://www.w3.org/2000/svg\">\n          <g fill=\"none\" fillRule=\"evenodd\">\n            <path\n              d=\"M1.5 5.2h4.8c.3 0 .5.2.5.4v5.1c-.1.2-.3.3-.4.3H1.4a.5.5 0 01-.5-.4V5.7c0-.3.2-.5.5-.5zm0-2.1h6.9c.3 0 .5.2.5.4v7a.5.5 0 01-1 0V4H1.5a.5.5 0 010-1zm0-2.1h9c.3 0 .5.2.5.4v9.1a.5.5 0 01-1 0V2H1.5a.5.5 0 010-1zm4.3 5.2H2V10h3.8V6.2z\"\n              id=\"a\"\n              fill=\"#999\"\n            />\n          </g>\n        </svg>\n        Viewports addon in the toolbar\n      </div>\n    </section>\n  </article>`,\n  styleUrls: ['./page.css'],\n})\nexport default class PageComponent {\n  user: User | null = null;\n\n  doLogout() {\n    this.user = null;\n  }\n\n  doLogin() {\n    this.user = { name: 'Jane Doe' };\n  }\n\n  doCreateAccount() {\n    this.user = { name: 'Jane Doe' };\n  }\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".storybook-page {\n  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;\n  font-size: 14px;\n  line-height: 24px;\n  padding: 48px 20px;\n  margin: 0 auto;\n  max-width: 600px;\n  color: #333;\n}\n\n.storybook-page h2 {\n  font-weight: 700;\n  font-size: 32px;\n  line-height: 1;\n  margin: 0 0 4px;\n  display: inline-block;\n  vertical-align: top;\n}\n\n.storybook-page p {\n  margin: 1em 0;\n}\n\n.storybook-page a {\n  text-decoration: none;\n  color: #1ea7fd;\n}\n\n.storybook-page ul {\n  padding-left: 30px;\n  margin: 1em 0;\n}\n\n.storybook-page li {\n  margin-bottom: 8px;\n}\n\n.storybook-page .tip {\n  display: inline-block;\n  border-radius: 1em;\n  font-size: 11px;\n  line-height: 12px;\n  font-weight: 700;\n  background: #e7fdd8;\n  color: #66bf3c;\n  padding: 4px 12px;\n  margin-right: 10px;\n  vertical-align: top;\n}\n\n.storybook-page .tip-wrapper {\n  font-size: 13px;\n  line-height: 20px;\n  margin-top: 40px;\n  margin-bottom: 40px;\n}\n\n.storybook-page .tip-wrapper svg {\n  display: inline-block;\n  height: 12px;\n  width: 12px;\n  margin-right: 4px;\n  vertical-align: top;\n  margin-top: 3px;\n}\n\n.storybook-page .tip-wrapper svg path {\n  fill: #1ea7fd;\n}\n",
+                    "styleUrl": "./page.css"
+                }
+            ],
+            "stylesData": ""
+        },
+        {
+            "name": "RegisterComponent",
+            "id": "component-RegisterComponent-09e9666f99621fe2d1b016f9c216e09c3527497dbacb08376a8f57ff8d6be20b672129996473b990151dde383a1e948ee77ea5f04885049eb0e1fbd3779603f5",
+            "file": "src/app/register/register.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-register",
+            "styleUrls": [
+                "./register.component.css"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./register.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "registerform",
+                    "defaultValue": "this.builder.group({\r\n    id:this.builder.control('',Validators.compose([Validators.required,Validators.minLength(5)])),\r\n    name:this.builder.control('',Validators.required),\r\n    password:this.builder.control('',Validators.compose([Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\\d$@$!%*?&].{8,}')])),\r\n    email:this.builder.control('',Validators.compose([Validators.required, Validators.email])),\r\n    gender:this.builder.control('male'),\r\n    role:this.builder.control(''),\r\n    isactive:this.builder.control(false)\r\n  })",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 19
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "proceedregisteration",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 29,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\r\nimport { FormBuilder, Validators } from '@angular/forms';\r\nimport { ToastrService } from 'ngx-toastr';\r\nimport { AuthService } from '../service/auth.service';\r\nimport { Router } from '@angular/router';\r\n\r\n@Component({\r\n  selector: 'app-register',\r\n  templateUrl: './register.component.html',\r\n  styleUrls: ['./register.component.css']\r\n})\r\nexport class RegisterComponent {\r\n\r\n  constructor(private builder: FormBuilder,private toastr:ToastrService,\r\n    private service:AuthService,private router:Router) {\r\n\r\n  }\r\n\r\n  registerform=this.builder.group({\r\n    id:this.builder.control('',Validators.compose([Validators.required,Validators.minLength(5)])),\r\n    name:this.builder.control('',Validators.required),\r\n    password:this.builder.control('',Validators.compose([Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\\d$@$!%*?&].{8,}')])),\r\n    email:this.builder.control('',Validators.compose([Validators.required, Validators.email])),\r\n    gender:this.builder.control('male'),\r\n    role:this.builder.control(''),\r\n    isactive:this.builder.control(false)\r\n  });\r\n\r\n  proceedregisteration(){\r\n    if(this.registerform.valid){\r\n      this.service.Proceedregister(this.registerform.value).subscribe(res => {\r\n        this.toastr.success('Por favor, contate o admin para permitir acesso','Registrado com sucesso')\r\n        this.router.navigate(['login']);\r\n      });\r\n    } else {\r\n      this.toastr.warning('Por favor, entre com dados validos');\r\n    }\r\n  }\r\n}\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".example-form {\r\n    min-width: 150px;\r\n    width: 100%;\r\n  }\r\n  \r\n  .example-full-width {\r\n    width: 100%;\r\n  }\r\n\r\nbutton{\r\n  margin: 5px;\r\n}",
+                    "styleUrl": "./register.component.css"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "builder",
+                        "type": "FormBuilder",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "toastr",
+                        "type": "ToastrService",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "service",
+                        "type": "AuthService",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "router",
+                        "type": "Router",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 12,
+                "jsdoctags": [
+                    {
+                        "name": "builder",
+                        "type": "FormBuilder",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "toastr",
+                        "type": "ToastrService",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "service",
+                        "type": "AuthService",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "router",
+                        "type": "Router",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "templateData": "<mat-card>\r\n    <mat-card-header>\r\n        <h1>Registro de Usuário</h1>\r\n    </mat-card-header>\r\n    <mat-card-content>\r\n        <form class=\"example-form\" [formGroup]=\"registerform\" (ngSubmit)=\"proceedregisteration()\">\r\n            <mat-form-field class=\"example-full-width\">\r\n                <mat-label>Nome de usuário</mat-label>\r\n                <input matInput formControlName=\"id\">\r\n            </mat-form-field>\r\n\r\n            <mat-form-field class=\"example-full-width\">\r\n                <mat-label>Nome</mat-label>\r\n                <input matInput formControlName=\"name\">\r\n            </mat-form-field>\r\n\r\n            <mat-form-field class=\"example-full-width\">\r\n                <mat-label>Senha</mat-label>\r\n                <input type=\"password\" matInput formControlName=\"password\">\r\n            </mat-form-field>\r\n\r\n            <mat-form-field class=\"example-full-width\">\r\n                <mat-label>Email</mat-label>\r\n                <input matInput formControlName=\"email\">\r\n            </mat-form-field>\r\n\r\n            <div>\r\n                <mat-radio-group formControlName=\"gender\" aria-label=\"Gender\">\r\n                    <mat-radio-button value=\"male\">Masculino</mat-radio-button>\r\n                    <mat-radio-button value=\"female\">Feminino</mat-radio-button>\r\n                  </mat-radio-group>              \r\n            </div>\r\n\r\n            <div>\r\n                <button mat-raised-button color=\"primary\">Registrar</button>\r\n                <a routerLink=\"/login\" mat-raised-button color=\"accent\">Volte para Login</a>\r\n            </div>\r\n            </form>\r\n    </mat-card-content>\r\n</mat-card>\r\n  "
+        },
+        {
+            "name": "UpdatepopupComponent",
+            "id": "component-UpdatepopupComponent-1d28042cceab7f266d16f3d751e40c04566b24ca9a7b56b7f804d3f8325db8d91c585edb4821845712f4352ee72dd88db019f5569d282d286552dc20f19d3e34",
+            "file": "src/app/updatepopup/updatepopup.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-updatepopup",
+            "styleUrls": [
+                "./updatepopup.component.css"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./updatepopup.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "data",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "any",
+                    "optional": false,
+                    "description": "",
+                    "line": 15,
+                    "decorators": [
+                        {
+                            "name": "Inject",
+                            "stringifiedArguments": "MAT_DIALOG_DATA"
+                        }
+                    ],
+                    "modifierKind": [
+                        167,
+                        123
+                    ]
+                },
+                {
+                    "name": "editdata",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "any",
+                    "optional": false,
+                    "description": "",
+                    "line": 18
+                },
+                {
+                    "name": "registerform",
+                    "defaultValue": "this.builder.group({\r\n    id: this.builder.control(''),\r\n    name: this.builder.control(''),\r\n    password: this.builder.control(''),\r\n    email: this.builder.control(''),\r\n    gender: this.builder.control('male'),\r\n    role: this.builder.control('', Validators.required),\r\n    isactive: this.builder.control(false)\r\n  })",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 34
+                },
+                {
+                    "name": "rolelist",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "any",
+                    "optional": false,
+                    "description": "",
+                    "line": 31
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 19,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "updateuser",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 44,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, OnInit, Inject } from '@angular/core';\r\nimport { FormBuilder, Validators } from '@angular/forms';\r\nimport { AuthService } from '../service/auth.service';\r\nimport { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';\r\nimport { ToastrService } from 'ngx-toastr';\r\n\r\n@Component({\r\n  selector: 'app-updatepopup',\r\n  templateUrl: './updatepopup.component.html',\r\n  styleUrls: ['./updatepopup.component.css']\r\n})\r\nexport class UpdatepopupComponent implements OnInit {\r\n\r\n  constructor(private builder: FormBuilder, private service: AuthService, private toastr: ToastrService,\r\n    @Inject(MAT_DIALOG_DATA) public data: any, private dialog:MatDialogRef<UpdatepopupComponent>) {\r\n\r\n  }\r\n  editdata: any;\r\n  ngOnInit(): void {\r\n    this.service.GetAllRole().subscribe(res => {\r\n      this.rolelist = res;\r\n    })\r\n    if (this.data.usercode != null && this.data.usercode != '') {\r\n      this.service.Getbycode(this.data.usercode).subscribe(res => {\r\n        this.editdata = res;\r\n        this.registerform.setValue({ id: this.editdata.id, name: this.editdata.name, email: this.editdata.email, password: this.editdata.password, role: this.editdata.role, gender: this.editdata.gender, isactive: this.editdata.isactive })\r\n      });\r\n    }\r\n  }\r\n\r\n  rolelist: any;\r\n\r\n\r\n  registerform = this.builder.group({\r\n    id: this.builder.control(''),\r\n    name: this.builder.control(''),\r\n    password: this.builder.control(''),\r\n    email: this.builder.control(''),\r\n    gender: this.builder.control('male'),\r\n    role: this.builder.control('', Validators.required),\r\n    isactive: this.builder.control(false)\r\n  });\r\n\r\n  updateuser() {\r\n    if (this.registerform.valid) {\r\n      this.service.Updateuser(this.registerform.value.id, this.registerform.value).subscribe(res => {\r\n        this.toastr.success('Atualização feita com sucesso');\r\n        this.dialog.close();\r\n      })\r\n    } else {\r\n      this.toastr.warning('Por favor selecione um cargo')\r\n    }\r\n  }\r\n\r\n}\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "",
+                    "styleUrl": "./updatepopup.component.css"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "builder",
+                        "type": "FormBuilder",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "service",
+                        "type": "AuthService",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "toastr",
+                        "type": "ToastrService",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "data",
+                        "type": "any",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "dialog",
+                        "type": "MatDialogRef<UpdatepopupComponent>",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 12,
+                "jsdoctags": [
+                    {
+                        "name": "builder",
+                        "type": "FormBuilder",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "service",
+                        "type": "AuthService",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "toastr",
+                        "type": "ToastrService",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "data",
+                        "type": "any",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "dialog",
+                        "type": "MatDialogRef<UpdatepopupComponent>",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<mat-card>\r\n    <mat-card-header>\r\n        <h1>Atualizar usuário</h1>\r\n    </mat-card-header>\r\n    <mat-card-content>\r\n        <form class=\"example-form\" [formGroup]=\"registerform\" (ngSubmit)=\"updateuser\">\r\n            \r\n            <mat-form-field class=\"example-full-width\">\r\n                <mat-label>Cargo</mat-label>\r\n                <mat-select formControlName=\"role\">\r\n                    <mat-option value=\"\">Selecione um cargo</mat-option>\r\n                    <mat-option *ngFor=\"let item of rolelist\" [value]=\"item.code\">\r\n      {{item.name}}\r\n                    </mat-option>\r\n                </mat-select>\r\n            </mat-form-field>\r\n\r\n            <div>\r\n                <mat-checkbox formControlName=\"isactive\" class=\"example-margin\">Está ativo</mat-checkbox>              \r\n            </div>\r\n\r\n            <div>\r\n                <button mat-raised-button color=\"primary\">Alterar</button>\r\n                <a mat-dialog-close mat-raised-button color=\"accent\">Fechar</a>\r\n            </div>\r\n            </form>\r\n    </mat-card-content>\r\n</mat-card>\r\n  "
+        },
+        {
+            "name": "UserlistingComponent",
+            "id": "component-UserlistingComponent-edb20a3523f67b92edb7fcb5beed98c5fce6c8511e708b70350d3b39ccc03d0b23c2a35fe4db3b22e290219c64eb7651d45837f0bb7df7ee1480308f8058d3e7",
+            "file": "src/app/userlisting/userlisting.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-userlisting",
+            "styleUrls": [
+                "./userlisting.component.css"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./userlisting.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "dataSource",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "any",
+                    "optional": false,
+                    "description": "",
+                    "line": 20
+                },
+                {
+                    "name": "displayedColumns",
+                    "defaultValue": "['id','name','email','role','status','action']",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string[]",
+                    "optional": false,
+                    "description": "",
+                    "line": 32
+                },
+                {
+                    "name": "paginator",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "MatPaginator",
+                    "optional": false,
+                    "description": "",
+                    "line": 21,
+                    "decorators": [
+                        {
+                            "name": "ViewChild",
+                            "stringifiedArguments": "MatPaginator"
+                        }
+                    ],
+                    "modifierKind": [
+                        167
+                    ]
+                },
+                {
+                    "name": "sort",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "MatSort",
+                    "optional": false,
+                    "description": "",
+                    "line": 22,
+                    "decorators": [
+                        {
+                            "name": "ViewChild",
+                            "stringifiedArguments": "MatSort"
+                        }
+                    ],
+                    "modifierKind": [
+                        167
+                    ]
+                },
+                {
+                    "name": "userlist",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "any",
+                    "optional": false,
+                    "description": "",
+                    "line": 19
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "Loaduser",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 24,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "opendialog",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 47,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "UpdateUser",
+                    "args": [
+                        {
+                            "name": "code",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 33,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "code",
+                            "type": "any",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { AuthService } from './../service/auth.service';\r\nimport { Router } from '@angular/router';\r\nimport { Component, ViewChild } from '@angular/core';\r\nimport { MatTableDataSource } from '@angular/material/table';\r\nimport { MatPaginator } from '@angular/material/paginator';\r\nimport { MatSort } from '@angular/material/sort';\r\nimport { MatDialog } from '@angular/material/dialog';\r\nimport { UpdatepopupComponent } from '../updatepopup/updatepopup.component';\r\n\r\n@Component({\r\n  selector: 'app-userlisting',\r\n  templateUrl: './userlisting.component.html',\r\n  styleUrls: ['./userlisting.component.css']\r\n})\r\nexport class UserlistingComponent {\r\n  constructor(private service: AuthService, private dialog:MatDialog){\r\n    this.Loaduser();\r\n  }\r\n  userlist:any;\r\n  dataSource:any;\r\n  @ViewChild(MatPaginator) paginator !:MatPaginator;\r\n  @ViewChild(MatSort) sort !:MatSort;\r\n\r\n  Loaduser(){\r\n    this.service.GetAll().subscribe(res=>{\r\n    this.userlist = res;\r\n    this.dataSource=new MatTableDataSource(this.userlist);\r\n    this.dataSource.paginator=this.paginator;\r\n    this.dataSource.sort=this.sort;\r\n    })\r\n  }\r\n  displayedColumns: string[] = ['id','name','email','role','status','action'];\r\n  UpdateUser(code: any){\r\n    const popup = this.dialog.open(UpdatepopupComponent,{\r\n      enterAnimationDuration:'1000ms',\r\n      exitAnimationDuration: '500ms',\r\n      width:'50%',\r\n      data:{\r\n        usercode:code\r\n      }\r\n    })\r\n    popup.afterClosed().subscribe(res=>{\r\n\r\n    });\r\n  }\r\n\r\n  opendialog(){\r\n    this.Loaduser();\r\n  }\r\n}\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "",
+                    "styleUrl": "./userlisting.component.css"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "service",
+                        "type": "AuthService",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "dialog",
+                        "type": "MatDialog",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 15,
+                "jsdoctags": [
+                    {
+                        "name": "service",
+                        "type": "AuthService",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "dialog",
+                        "type": "MatDialog",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "templateData": "<div class=\"mat-elevation-z8\">\r\n    <table mat-table matSort [dataSource]=\"dataSource\">\r\n  \r\n      <!-- Coluna Usuário -->\r\n      <ng-container matColumnDef=\"id\">\r\n        <th mat-header-cell mat-sort-header *matHeaderCellDef> Usuário </th>\r\n        <td mat-cell *matCellDef=\"let element\"> {{element.id}} </td>\r\n      </ng-container>\r\n  \r\n      <!-- Coluna Nome -->\r\n      <ng-container matColumnDef=\"name\">\r\n        <th mat-header-cell mat-sort-header *matHeaderCellDef> Nome </th>\r\n        <td mat-cell *matCellDef=\"let element\"> {{element.name}} </td>\r\n      </ng-container>\r\n  \r\n      <!-- Coluna Email -->\r\n      <ng-container matColumnDef=\"email\">\r\n        <th mat-header-cell mat-sort-header *matHeaderCellDef> Email </th>\r\n        <td mat-cell *matCellDef=\"let element\"> {{element.email}} </td>\r\n      </ng-container>\r\n  \r\n      <!-- Coluna cargo -->\r\n      <ng-container matColumnDef=\"role\">\r\n        <th mat-header-cell mat-sort-header *matHeaderCellDef> Cargo </th>\r\n        <td mat-cell *matCellDef=\"let element\"> {{element.role===''? 'Sem cargo': element.role}} </td>\r\n      </ng-container>\r\n\r\n      <!-- Coluna status -->\r\n      <ng-container matColumnDef=\"status\">\r\n        <th mat-header-cell mat-sort-header *matHeaderCellDef> Status </th>\r\n        <td mat-cell *matCellDef=\"let element\"> {{element.isactive ?'Ativo':'Inativo'}} </td>\r\n      </ng-container>\r\n\r\n      <!-- Coluna action -->\r\n      <ng-container matColumnDef=\"action\">\r\n        <th mat-header-cell *matHeaderCellDef> Ação </th>\r\n        <td mat-cell *matCellDef=\"let element\"> \r\n            <a (click)=\"UpdateUser(element.id)\" mat-raised-button color=\"primary\">Atualizar</a>\r\n        </td>\r\n      </ng-container>\r\n  \r\n      <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\r\n      <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\r\n    </table>\r\n  \r\n    <mat-paginator [pageSizeOptions]=\"[5, 10, 20]\"\r\n                   showFirstLastButtons\r\n                   aria-label=\"Select page of periodic elements\">\r\n    </mat-paginator>\r\n  </div>\r\n  "
+        }
+    ],
+    "modules": [
+        {
+            "name": "AppModule",
+            "id": "module-AppModule-a10c190a4cf65cf1432bcbbeeacfa7502810e5ef7104ef7f4b7f570a516fdafef66e72e689687a3d2387a3f3aae6a0dbf770f256d1a2d824f0816ee2e574fe83",
+            "description": "",
+            "deprecationMessage": "",
+            "deprecated": false,
+            "file": "src/app/app.module.ts",
+            "methods": [],
+            "sourceCode": "import { NgModule } from '@angular/core';\r\nimport { BrowserModule } from '@angular/platform-browser';\r\n\r\nimport { AppRoutingModule } from './app-routing.module';\r\nimport { AppComponent } from './app.component';\r\nimport { BrowserAnimationsModule } from '@angular/platform-browser/animations';\r\nimport { ReactiveFormsModule } from '@angular/forms';\r\nimport { MaterialModule } from 'src/material.module';\r\nimport { HttpClientModule } from '@angular/common/http';\r\nimport { ToastrModule } from 'ngx-toastr';\r\nimport { RegisterComponent } from './register/register.component';\r\nimport { LoginComponent } from './login/login.component';\r\nimport { HomeComponent } from './home/home.component';\r\nimport { UserlistingComponent } from './userlisting/userlisting.component';\r\nimport { UpdatepopupComponent } from './updatepopup/updatepopup.component';\r\n\r\n@NgModule({\r\n  declarations: [\r\n    AppComponent,\r\n    RegisterComponent,\r\n    LoginComponent,\r\n    HomeComponent,\r\n    UserlistingComponent,\r\n    UpdatepopupComponent\r\n  ],\r\n  imports: [\r\n    BrowserModule,\r\n    AppRoutingModule,\r\n    BrowserAnimationsModule,\r\n    MaterialModule,\r\n    ReactiveFormsModule,\r\n    HttpClientModule,\r\n    ToastrModule.forRoot()\r\n  ],\r\n  providers: [],\r\n  bootstrap: [AppComponent]\r\n})\r\nexport class AppModule { }\r\n",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "AppComponent"
+                        },
+                        {
+                            "name": "HomeComponent"
+                        },
+                        {
+                            "name": "LoginComponent"
+                        },
+                        {
+                            "name": "RegisterComponent"
+                        },
+                        {
+                            "name": "UpdatepopupComponent"
+                        },
+                        {
+                            "name": "UserlistingComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": [
+                        {
+                            "name": "AppRoutingModule"
+                        },
+                        {
+                            "name": "MaterialModule"
+                        }
+                    ]
+                },
+                {
+                    "type": "exports",
+                    "elements": []
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": [
+                        {
+                            "name": "AppComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "AppRoutingModule",
+            "id": "module-AppRoutingModule-6004824b935a19707132f515c486124406e04d6e5a6b86d2ffcb7595d292c03a6d94b8af3b4d8d9c2fd363635f25c6081352e474461b31c6703e62e858efdf22",
+            "description": "",
+            "deprecationMessage": "",
+            "deprecated": false,
+            "file": "src/app/app-routing.module.ts",
+            "methods": [],
+            "sourceCode": "import { NgModule } from '@angular/core';\r\nimport { RouterModule, Routes } from '@angular/router';\r\nimport { HomeComponent } from './home/home.component';\r\nimport { RegisterComponent } from './register/register.component';\r\nimport { LoginComponent } from './login/login.component';\r\nimport { UserlistingComponent } from './userlisting/userlisting.component';\r\nimport { AuthGuard } from './guard/auth.guard';\r\n\r\nconst routes: Routes = [\r\n  {path:'',component:HomeComponent,canActivate:[AuthGuard]},\r\n  {path:'register',component:RegisterComponent},\r\n  {path:'login',component:LoginComponent},\r\n  {path:'user',component:UserlistingComponent,canActivate:[AuthGuard]}\r\n];\r\n\r\n@NgModule({\r\n  imports: [RouterModule.forRoot(routes)],\r\n  exports: [RouterModule]\r\n})\r\nexport class AppRoutingModule { }\r\n",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": []
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": []
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "MaterialModule",
+            "id": "module-MaterialModule-da3265112b78cbc77bd324194ff753a7ef73bacc5db9e18562cdf80185d0d53791a1c7ab0f16319f576446c74cdd098672a4775b94275de5bec72d05bd8dccff",
+            "description": "",
+            "deprecationMessage": "",
+            "deprecated": false,
+            "file": "src/material.module.ts",
+            "methods": [],
+            "sourceCode": "import { NgModule } from \"@angular/core\";\r\nimport {MatInputModule} from '@angular/material/input';\r\nimport {MatSelectModule} from '@angular/material/select';\r\nimport {MatCardModule} from '@angular/material/card';\r\nimport {MatRadioModule} from '@angular/material/radio';\r\nimport {MatCheckboxModule} from '@angular/material/checkbox';\r\nimport {MatTableModule} from '@angular/material/table';\r\nimport {MatPaginatorModule} from '@angular/material/paginator';\r\nimport {MatSortModule} from '@angular/material/sort';\r\nimport {MatDialogModule} from '@angular/material/dialog';\r\nimport {MatButtonModule} from '@angular/material/button';\r\n\r\n@NgModule({\r\n    exports: [\r\n        MatInputModule,\r\n        MatSelectModule,\r\n        MatCardModule,\r\n        MatRadioModule,\r\n        MatCheckboxModule,\r\n        MatTableModule,\r\n        MatPaginatorModule,\r\n        MatSortModule,\r\n        MatDialogModule,\r\n        MatButtonModule\r\n    ]\r\n})\r\n\r\n\r\n\r\nexport class MaterialModule {\r\n\r\n}",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": []
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": []
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        }
+    ],
+    "miscellaneous": {
+        "variables": [
+            {
+                "name": "Large",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/Button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    size: 'large',\n    label: 'Button',\n  },\n}"
+            },
+            {
+                "name": "LoggedIn",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/Header.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    user: {\n      name: 'Jane Doe',\n    },\n  },\n}"
+            },
+            {
+                "name": "LoggedIn",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/Page.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: (args: Page) => ({\n    props: args,\n  }),\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    const loginButton = await canvas.getByRole('button', {\n      name: /Log in/i,\n    });\n    await userEvent.click(loginButton);\n  },\n}"
+            },
+            {
+                "name": "LoggedOut",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/Header.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{}"
+            },
+            {
+                "name": "LoggedOut",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/Page.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  render: (args: Page) => ({\n    props: args,\n  }),\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/Button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<Button>",
+                "defaultValue": "{\n  title: 'Example/Button',\n  component: Button,\n  tags: ['autodocs'],\n  render: (args: Button) => ({\n    props: {\n      backgroundColor: null,\n      ...args,\n    },\n  }),\n  argTypes: {\n    backgroundColor: {\n      control: 'color',\n    },\n  },\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/Header.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<Header>",
+                "defaultValue": "{\n  title: 'Example/Header',\n  component: Header,\n  // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/angular/writing-docs/autodocs\n  tags: ['autodocs'],\n  render: (args) => ({ props: args }),\n  decorators: [\n    moduleMetadata({\n      declarations: [Button],\n      imports: [CommonModule],\n    }),\n  ],\n  parameters: {\n    // More on how to position stories at: https://storybook.js.org/docs/angular/configure/story-layout\n    layout: 'fullscreen',\n  },\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/Page.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<Page>",
+                "defaultValue": "{\n  title: 'Example/Page',\n  component: Page,\n  parameters: {\n    // More on how to position stories at: https://storybook.js.org/docs/angular/configure/story-layout\n    layout: 'fullscreen',\n  },\n  decorators: [\n    moduleMetadata({\n      declarations: [Button, Header],\n      imports: [CommonModule],\n    }),\n  ],\n}"
+            },
+            {
+                "name": "preview",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": ".storybook/preview.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Preview",
+                "defaultValue": "{\n  parameters: {\n    actions: { argTypesRegex: \"^on[A-Z].*\" },\n    controls: {\n      matchers: {\n        color: /(background|color)$/i,\n        date: /Date$/,\n      },\n    },\n  },\n}"
+            },
+            {
+                "name": "Primary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/Button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    primary: true,\n    label: 'Button',\n  },\n}"
+            },
+            {
+                "name": "Secondary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/Button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    label: 'Button',\n  },\n}"
+            },
+            {
+                "name": "Small",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/Button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    size: 'small',\n    label: 'Button',\n  },\n}"
+            }
+        ],
+        "functions": [],
+        "typealiases": [
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<Button>",
+                "file": "src/stories/Button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 180
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<Header>",
+                "file": "src/stories/Header.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 180
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<Page>",
+                "file": "src/stories/Page.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 180
+            }
+        ],
+        "enumerations": [],
+        "groupedVariables": {
+            "src/stories/Button.stories.ts": [
+                {
+                    "name": "Large",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/Button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    size: 'large',\n    label: 'Button',\n  },\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/Button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<Button>",
+                    "defaultValue": "{\n  title: 'Example/Button',\n  component: Button,\n  tags: ['autodocs'],\n  render: (args: Button) => ({\n    props: {\n      backgroundColor: null,\n      ...args,\n    },\n  }),\n  argTypes: {\n    backgroundColor: {\n      control: 'color',\n    },\n  },\n}"
+                },
+                {
+                    "name": "Primary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/Button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    primary: true,\n    label: 'Button',\n  },\n}"
+                },
+                {
+                    "name": "Secondary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/Button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    label: 'Button',\n  },\n}"
+                },
+                {
+                    "name": "Small",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/Button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    size: 'small',\n    label: 'Button',\n  },\n}"
+                }
+            ],
+            "src/stories/Header.stories.ts": [
+                {
+                    "name": "LoggedIn",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/Header.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    user: {\n      name: 'Jane Doe',\n    },\n  },\n}"
+                },
+                {
+                    "name": "LoggedOut",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/Header.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/Header.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<Header>",
+                    "defaultValue": "{\n  title: 'Example/Header',\n  component: Header,\n  // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/angular/writing-docs/autodocs\n  tags: ['autodocs'],\n  render: (args) => ({ props: args }),\n  decorators: [\n    moduleMetadata({\n      declarations: [Button],\n      imports: [CommonModule],\n    }),\n  ],\n  parameters: {\n    // More on how to position stories at: https://storybook.js.org/docs/angular/configure/story-layout\n    layout: 'fullscreen',\n  },\n}"
+                }
+            ],
+            "src/stories/Page.stories.ts": [
+                {
+                    "name": "LoggedIn",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/Page.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: (args: Page) => ({\n    props: args,\n  }),\n  play: async ({ canvasElement }) => {\n    const canvas = within(canvasElement);\n    const loginButton = await canvas.getByRole('button', {\n      name: /Log in/i,\n    });\n    await userEvent.click(loginButton);\n  },\n}"
+                },
+                {
+                    "name": "LoggedOut",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/Page.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  render: (args: Page) => ({\n    props: args,\n  }),\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/Page.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<Page>",
+                    "defaultValue": "{\n  title: 'Example/Page',\n  component: Page,\n  parameters: {\n    // More on how to position stories at: https://storybook.js.org/docs/angular/configure/story-layout\n    layout: 'fullscreen',\n  },\n  decorators: [\n    moduleMetadata({\n      declarations: [Button, Header],\n      imports: [CommonModule],\n    }),\n  ],\n}"
+                }
+            ],
+            ".storybook/preview.ts": [
+                {
+                    "name": "preview",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": ".storybook/preview.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Preview",
+                    "defaultValue": "{\n  parameters: {\n    actions: { argTypesRegex: \"^on[A-Z].*\" },\n    controls: {\n      matchers: {\n        color: /(background|color)$/i,\n        date: /Date$/,\n      },\n    },\n  },\n}"
+                }
+            ]
+        },
+        "groupedFunctions": {},
+        "groupedEnumerations": {},
+        "groupedTypeAliases": {
+            "src/stories/Button.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<Button>",
+                    "file": "src/stories/Button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 180
+                }
+            ],
+            "src/stories/Header.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<Header>",
+                    "file": "src/stories/Header.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 180
+                }
+            ],
+            "src/stories/Page.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<Page>",
+                    "file": "src/stories/Page.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 180
+                }
+            ]
+        }
+    },
+    "routes": {
+        "name": "<root>",
+        "kind": "module",
+        "className": "AppModule",
+        "children": [
+            {
+                "name": "routes",
+                "filename": "src/app/app-routing.module.ts",
+                "module": "AppRoutingModule",
+                "children": [
+                    {
+                        "path": "",
+                        "component": "HomeComponent",
+                        "canActivate": [
+                            "AuthGuard"
+                        ]
+                    },
+                    {
+                        "path": "register",
+                        "component": "RegisterComponent"
+                    },
+                    {
+                        "path": "login",
+                        "component": "LoginComponent"
+                    },
+                    {
+                        "path": "user",
+                        "component": "UserlistingComponent",
+                        "canActivate": [
+                            "AuthGuard"
+                        ]
+                    }
+                ],
+                "kind": "module"
+            }
+        ]
+    },
+    "coverage": {
+        "count": 3,
+        "status": "low",
+        "files": [
+            {
+                "filePath": ".storybook/preview.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "preview",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/app.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "AppComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/guard/auth.guard.ts",
+                "type": "injectable",
+                "linktype": "injectable",
+                "name": "AuthGuard",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/home/home.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "HomeComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/login/login.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "LoginComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/register/register.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "RegisterComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/service/auth.service.ts",
+                "type": "injectable",
+                "linktype": "injectable",
+                "name": "AuthService",
+                "coveragePercent": 0,
+                "coverageCount": "0/10",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/updatepopup/updatepopup.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "UpdatepopupComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/8",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/userlisting/userlisting.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "UserlistingComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/10",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/Button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Large",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/Button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/Button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Primary",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/Button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Secondary",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/Button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Small",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/Header.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "LoggedIn",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/Header.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "LoggedOut",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/Header.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/Page.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "LoggedIn",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/Page.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "LoggedOut",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/Page.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/User.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "User",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/button.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "ButtonComponent",
+                "coveragePercent": 83,
+                "coverageCount": "5/6",
+                "status": "very-good"
+            },
+            {
+                "filePath": "src/stories/header.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "HeaderComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/page.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "PageComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
+                "status": "low"
+            }
+        ]
+    }
+}
